@@ -5,6 +5,9 @@ function getAbsolutePath(value) {
 }
 
 const config = {
+  staticDirs: [
+    { from: "../../../packages/tailwind-config/fonts", to: "/fonts" },
+  ],
   stories: ["../stories/*.stories.tsx", "../stories/**/*.stories.tsx"],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
