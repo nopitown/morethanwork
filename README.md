@@ -17,6 +17,18 @@ La web estará en `http://localhost:3000`. Para abrir Storybook:
 npm run dev --workspace=docs
 ```
 
+## Deploy en Vercel
+
+Configura el proyecto de la web con **Root Directory** = `apps/web` y habilita
+**Include source files outside of the Root Directory in the Build Step** para
+acceder a los paquetes compartidos. Usa el preset **Next.js** y deja el comando
+de instalación automático.
+
+`apps/web/vercel.json` define el framework, el build (`npm run build`) y la salida
+(`.next`). Elimina cualquier override de Output Directory con valor `public`
+en los ajustes del proyecto y vuelve a desplegar. La raíz del repositorio es un
+workspace de Turborepo; la aplicación Next.js está en `apps/web`.
+
 ## Estructura
 
 - `apps/web`: Next.js App Router; home, cuestionario, resultados, explorador y detalles.

@@ -27,6 +27,7 @@ export function ActivityCard({
           src={activityImage(activity.slug)}
           alt=""
           fill
+          unoptimized
           sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 350px"
         />
       </Link>
