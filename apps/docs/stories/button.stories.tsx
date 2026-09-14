@@ -1,46 +1,38 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "@repo/ui/button";
+import { action } from "@storybook/addon-actions";
+import { Button } from "@repo/ui/components/button";
 
-const meta: Meta<typeof Button> = {
+const meta = {
+  title: "UI/Button",
   component: Button,
-  argTypes: {
-    type: {
-      control: { type: "radio" },
-      options: ["button", "submit", "reset"],
-    },
+  tags: ["autodocs"],
+  parameters: { layout: "centered" },
+  args: {
+    children: "Button",
+    onClick: action("clicked"),
   },
-};
+  argTypes: {
+    variant: {
+      control: "select",
+      options: ["default", "outline", "secondary", "ghost", "destructive", "link"],
+    },
+    size: {
+      control: "select",
+      options: ["default", "xs", "sm", "lg", "icon", "icon-xs", "icon-sm", "icon-lg"],
+    },
+    disabled: { control: "boolean" },
+  },
+} satisfies Meta<typeof Button>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
-type Story = StoryObj<typeof Button>;
+export const Default: Story = {};
 
-/*
- *👇 Render functions are a framework specific feature to allow you control on how the component renders.
- * See https://storybook.js.org/docs/react/api/csf
- * to learn how to use render functions.
- */
-export const Primary: Story = {
-  render: (props) => (
-    <Button
-      {...props}
-      onClick={(): void => {
-        // eslint-disable-next-line no-alert -- alert for demo
-        alert("Hello from Turborepo!");
-      }}
-    >
-      Hello
-    </Button>
-  ),
-  name: "Button",
-  args: {
-    children: "Hello",
-    type: "button",
-    style: {
-      color: "blue",
-      border: "1px solid gray",
-      padding: 10,
-      borderRadius: 10,
-    },
-  },
+export const Outline: Story = {
+  args: { variant: "outline" },
+};
+
+export const Disabled: Story = {
+  args: { disabled: true },
 };
