@@ -28,6 +28,7 @@
     "storybook": "^8.2.6",
     "@repo/typescript-config": "*",
     "typescript": "5.5.4",
-    "vite": "^5.1.4"
+    "vite": "^5.1.4",
+    "@repo/tailwind-config": "*"
   }
 }
