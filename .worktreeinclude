@@ -1,0 +1,4 @@
+# Copy gitignored local env into each new Orca worktree.
+# .env.test is already tracked, so it is not listed here.
+.env
+.env.local

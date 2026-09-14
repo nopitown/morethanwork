@@ -1,0 +1,5 @@
+# Share install dirs across Orca worktrees (symlink/share, not a copy).
+# Do not list .env here; that is copied via .worktreeinclude.
+worktree:
+  sharedDirectories:
+    - node_modules
