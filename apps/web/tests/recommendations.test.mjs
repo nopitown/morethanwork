@@ -1,17 +1,17 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { activities } from "../features/activities/activities.ts";
 import {
-  activities,
+  budgetLimits,
   recommend,
   timeLimits,
-  budgetLimits,
-} from "../app/lib/activities.ts";
+} from "../features/quest/recommend.ts";
 import {
   parseSession,
   isComplete,
   availableStep,
   questions,
-} from "../app/lib/quest.ts";
+} from "../features/quest/quest.ts";
 const base = {
   mood: "good",
   type: "any",

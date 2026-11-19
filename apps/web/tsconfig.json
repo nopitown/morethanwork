@@ -6,7 +6,12 @@
         "name": "next"
       }
     ],
-    "strictNullChecks": true
+    "paths": {
+      "@components/*": ["./components/*"],
+      "@features/*": ["./features/*"]
+    },
+    "strictNullChecks": true,
+    "allowImportingTsExtensions": true
   },
   "include": [
     "**/*.ts",

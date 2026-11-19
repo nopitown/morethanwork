@@ -12,3 +12,7 @@ export const Planta: Story = {};
 export const Caminata: Story = {
   args: { minutes: 30, cost: 0, place: "outside" },
 };
+
+export const Editorial: Story = {
+  args: { variant: "editorial" },
+};

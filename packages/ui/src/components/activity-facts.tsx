@@ -1,4 +1,20 @@
 import type { ReactNode } from "react";
+
+const styles = {
+  default: {
+    grid: "m-0 grid grid-cols-2 gap-3 md:grid-cols-4",
+    item: "flex items-center gap-3 rounded-xl bg-muted p-4",
+    label: "mb-1 text-xs font-semibold",
+    value: "m-0 text-xs text-muted-foreground",
+  },
+  editorial: {
+    grid: "m-0 grid grid-cols-4 gap-2.5 p-0 [@media(max-width:700px)]:grid-cols-2 [@media(max-width:700px)]:gap-x-[9px] [@media(max-width:700px)]:gap-y-3.5",
+    item: "flex items-center gap-3 rounded-[12px] bg-[#f2f0e9] px-[13px] py-[17px] [&>svg]:shrink-0 [@media(700px<width<=900px)]:gap-2 [@media(700px<width<=900px)]:px-2.5 [@media(700px<width<=900px)]:[&>svg]:w-[21px] [@media(max-width:700px)]:gap-[9px] [@media(max-width:700px)]:bg-transparent [@media(max-width:700px)]:p-0 [@media(max-width:700px)]:[&>svg]:w-[22px]",
+    label:
+      "mb-1 text-[11px] leading-[1.3333333333] font-semibold [@media(max-width:700px)]:text-[10px]",
+    value: "m-0 text-[11px] leading-[1.4] text-muted-foreground",
+  },
+};
 function FactIcon({ children }: { children: ReactNode }) {
   return (
     <svg
@@ -20,10 +36,12 @@ export function ActivityFacts({
   minutes,
   cost,
   place,
+  variant = "default",
 }: {
   minutes: number;
   cost: number;
   place: string;
+  variant?: keyof typeof styles;
 }) {
   const facts = [
     {
@@ -67,17 +85,15 @@ export function ActivityFacts({
       ),
     },
   ];
+  const appearance = styles[variant];
   return (
-    <dl className="activity-facts m-0 grid grid-cols-2 gap-3 md:grid-cols-4">
+    <dl className={appearance.grid}>
       {facts.map((fact) => (
-        <div
-          key={fact.label}
-          className="flex items-center gap-3 rounded-xl bg-muted p-4"
-        >
+        <div key={fact.label} className={appearance.item}>
           {fact.icon}
           <div>
-            <dt className="mb-1 text-xs font-semibold">{fact.label}</dt>
-            <dd className="m-0 text-xs text-muted-foreground">{fact.value}</dd>
+            <dt className={appearance.label}>{fact.label}</dt>
+            <dd className={appearance.value}>{fact.value}</dd>
           </div>
         </div>
       ))}

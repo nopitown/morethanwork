@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { cn } from "cn";
 
 export type Choice = {
   value: string;
@@ -20,6 +21,7 @@ export function ChoiceGroup({
   onChange,
   labelledBy,
   describedBy,
+  className,
 }: {
   name: string;
   options: readonly Choice[];
@@ -27,13 +29,14 @@ export function ChoiceGroup({
   onChange: (value: string) => void;
   labelledBy: string;
   describedBy?: string;
+  className?: string;
 }) {
   return (
     <div
       role="radiogroup"
       aria-labelledby={labelledBy}
       aria-describedby={describedBy}
-      className="grid gap-3"
+      className={cn("grid gap-3", className)}
     >
       {options.map((option) => (
         <label

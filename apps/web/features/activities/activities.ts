@@ -1,5 +1,6 @@
-import type { CompleteAnswers } from "./quest";
-export type ActivityType = Exclude<CompleteAnswers["type"], "any">;
+import type { CompleteAnswers } from "../quest/quest";
+
+export type ActivityType = "calm" | "creative" | "move" | "explore";
 export type Activity = {
   slug: string;
   title: string;
@@ -15,7 +16,7 @@ export type Activity = {
 };
 export const categories: Record<
   ActivityType,
-  { label: string; tone: string; phrase: string }
+  { label: string; tone: "sage" | "coral" | "sunshine" | "sky"; phrase: string }
 > = {
   calm: {
     label: "Calma",
@@ -269,26 +270,3 @@ export const activities: Activity[] = [
       "Elige un género que casi nunca escuches y busca una canción en una opción gratuita que ya uses. Escúchala sin hacer otra cosa.",
   },
 ];
-export const timeLimits = { short: 15, medium: 30, long: 120, any: Infinity };
-export const budgetLimits = { free: 0, low: 50, medium: 150, any: Infinity };
-export function recommend(
-  answers: CompleteAnswers,
-  catalog: readonly Activity[] = activities,
-): Activity[] {
-  return catalog
-    .filter(
-      (activity) =>
-        (answers.type === "any" || activity.type === answers.type) &&
-        activity.minutes <= timeLimits[answers.time] &&
-        activity.cost <= budgetLimits[answers.budget] &&
-        (answers.place === "any" || activity.place === answers.place),
-    )
-    .map((activity, index) => ({
-      activity,
-      index,
-      score: activity.moods.includes(answers.mood) ? 1 : 0,
-    }))
-    .sort((a, b) => b.score - a.score || a.index - b.index)
-    .map(({ activity }) => activity)
-    .slice(0, 6);
-}

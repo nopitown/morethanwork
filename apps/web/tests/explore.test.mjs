@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { activities } from "../app/lib/activities.ts";
-import { filterActivities } from "../app/lib/explore.ts";
+import { activities } from "../features/activities/activities.ts";
+import { filterActivities } from "../features/activities/explore.ts";
 const empty = { q: "", category: "", minutes: "", cost: "", place: "" };
 test("explore exposes the entire catalog without questionnaire answers", () => {
   assert.deepEqual(filterActivities(activities, empty), activities);

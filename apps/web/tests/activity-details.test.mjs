@@ -1,8 +1,11 @@
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import test from "node:test";
-import { activities } from "../app/lib/activities.ts";
-import { activityDetails, activityImage } from "../app/lib/activity-details.ts";
+import { activities } from "../features/activities/activities.ts";
+import {
+  activityDetails,
+  activityImage,
+} from "../features/activities/activity-details.ts";
 
 test("every recommendable activity has a complete detail and a local image", () => {
   assert.deepEqual(

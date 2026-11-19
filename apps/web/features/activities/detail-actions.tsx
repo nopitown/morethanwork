@@ -1,16 +1,15 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Button } from "@repo/ui/components/button";
-import { useQuestSession } from "../../lib/quest-session";
-import { isComplete } from "../../lib/quest";
+import { useQuestSession } from "../quest/quest-session";
+import { isComplete } from "../quest/quest";
 
 export function DetailBack({ slug, from }: { slug: string; from?: string }) {
   const { session, ready } = useQuestSession();
   const hasResults = ready && isComplete(session.answers);
   return (
     <Link
-      className="detail-back"
+      className="inline-flex min-h-8 items-center gap-3 text-[12px] text-foreground no-underline hover:underline phone:text-[11px]"
       href={from ?? (hasResults ? `/resultados#${slug}` : "/actividades")}
     >
       {from || !hasResults ? "Volver a actividades" : "Volver a resultados"}
@@ -31,11 +30,18 @@ export function StartActivity() {
     });
   }
   return (
-    <div className="detail-action">
-      <Button className="home-cta" onClick={start}>
+    <div className="[grid-area:action] phone:order-2">
+      <button
+        type="button"
+        className="action-primary w-full gap-[18px] [line-height:20px] phone:min-h-[51px] phone:[line-height:1.4285714286] phone:gap-3 phone:px-3.5 phone:text-[12px]"
+        onClick={start}
+      >
         {started ? "Ver mi primer paso" : "Quiero probar esta actividad"}
-      </Button>
-      <p role="status" className="detail-action-status">
+      </button>
+      <p
+        role="status"
+        className="mt-2.5 min-h-[18px] text-center text-[11px] text-muted-foreground phone:text-[10px]"
+      >
         {started
           ? "Tu primer paso está aquí. Empieza a tu ritmo."
           : "Sin prisa. Sin hacerlo perfecto."}

@@ -1,7 +1,8 @@
-"use client";
 import Link from "next/link";
+import { cn } from "@repo/ui/lib/utils";
+
 export function QuestCta({
-  className = "",
+  className,
   onOpen,
   label = "Encuentra algo para ti",
 }: {
@@ -12,7 +13,11 @@ export function QuestCta({
   return (
     <Link
       href="/cuestionario"
-      className={`home-cta ${className}`}
+      className={cn(
+        "action-primary",
+        "focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-brand",
+        className,
+      )}
       onClick={onOpen}
     >
       {label}

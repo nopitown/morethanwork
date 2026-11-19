@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ActivityFacts } from "@repo/ui/components/activity-facts";
-import { activities, categories } from "../../lib/activities";
-import { activityDetails, activityImage } from "../../lib/activity-details";
-import { InternalPage } from "../../components/internal-page";
-import { Sprout } from "../../components/illustrations";
-import { DetailBack, StartActivity } from "./detail-actions";
+import { InternalPage } from "@components/internal-page";
+import { ActivityDetail } from "@features/activities/activity-detail";
+import { activities } from "@features/activities/activities";
+import { activityDetails } from "@features/activities/activity-details";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -43,92 +40,9 @@ export default async function ActivityPage({ params, searchParams }: Props) {
       from.startsWith("/actividades?"))
       ? from
       : undefined;
-  const category = categories[activity.type];
   return (
-    <InternalPage className="detail-page" action="none">
-      <main id="contenido">
-        <nav className="detail-navigation" aria-label="Volver">
-          <DetailBack slug={slug} from={backTo} />
-        </nav>
-        <div className="detail-hero">
-          <Image
-            src={activityImage(slug)}
-            alt={detail.imageAlt}
-            fill
-            priority
-            sizes="(max-width: 1200px) 100vw, 1200px"
-          />
-          <p aria-hidden="true">{detail.heroNote}</p>
-        </div>
-        <article className="detail-sheet" aria-labelledby="activity-title">
-          <header className="detail-intro">
-            <span className={`activity-badge art-${category.tone}`}>
-              {category.label} ·{" "}
-              {activity.place === "home" ? "En casa" : "Afuera"}
-            </span>
-            <h1 id="activity-title">{activity.title}</h1>
-            <p className="detail-subtitle">{activity.description}</p>
-            <p className="detail-description">{detail.intro}</p>
-          </header>
-          <aside className={`detail-quote art-${category.tone}`}>
-            <p>“{detail.quote}”</p>
-            <Sprout />
-          </aside>
-          <div className="detail-facts">
-            <ActivityFacts
-              minutes={activity.minutes}
-              cost={activity.cost}
-              place={activity.place}
-            />
-          </div>
-          <StartActivity />
-          <section className="detail-benefits" aria-labelledby="benefits-title">
-            <h2 id="benefits-title">¿Por qué podría ayudarte?</h2>
-            <ul>
-              {detail.benefits.map((benefit) => (
-                <li key={benefit}>
-                  <span aria-hidden="true">✓</span>
-                  {benefit}
-                </li>
-              ))}
-            </ul>
-          </section>
-          <section className="detail-steps" aria-labelledby="steps-title">
-            <h2 id="steps-title">¿Cómo empezar?</h2>
-            <ol>
-              {detail.steps.map((step, index) => (
-                <li key={step}>
-                  <span aria-hidden="true">{index + 1}</span>
-                  <p>{step}</p>
-                </li>
-              ))}
-            </ol>
-            <div className="detail-materials">
-              <h3>Lo que necesitas</h3>
-              <p>{detail.materials}</p>
-              {activity.costNote && (
-                <p className="detail-cost-note">{activity.costNote}</p>
-              )}
-            </div>
-          </section>
-          <aside className={`detail-first-step art-${category.tone}`}>
-            <h2 id="primer-paso" tabIndex={-1}>
-              Tu primer paso
-            </h2>
-            <span className="first-step-icon" aria-hidden="true">
-              {activity.icon}
-            </span>
-            <p>{activity.firstStep}</p>
-            <span className="first-step-note">
-              Un pequeño comienzo también cuenta.
-            </span>
-          </aside>
-        </article>
-        <div className="detail-footer">
-          <Sprout />
-          <p>Más vida. Menos sobrepensar.</p>
-        </div>
-      </main>
+    <InternalPage action="none">
+      <ActivityDetail activity={activity} detail={detail} backTo={backTo} />
     </InternalPage>
   );
 }
