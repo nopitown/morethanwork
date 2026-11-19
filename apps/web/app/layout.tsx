@@ -14,10 +14,6 @@ export default function RootLayout({
     <html lang="es">
       <body className="[--page-gutter:min(4.45vw,53.4px)] stacked:[--page-gutter:24px]">
         {children}
-        <script
-          src="https://mcp.figma.com/mcp/html-to-design/capture.js"
-          async
-        />
       </body>
     </html>
   );

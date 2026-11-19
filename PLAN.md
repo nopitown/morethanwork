@@ -1,148 +1,141 @@
-# Sidequests — Plan de implementación
+# Sidequests — Implementation plan
 
-Objetivo: construir la experiencia del diseño para descubrir actividades e intereses más allá del trabajo, en desktop y mobile.
+Build the designed experience for discovering activities and interests beyond work on desktop and mobile.
 
-Flujo: **Home → cuestionario de cinco pasos → resultados → detalle de actividad**.
+**Home → five-step questionnaire → results → activity details**
 
-## Cómo usaremos este archivo
+## How to use this plan
 
-Cada casilla representa un ticket completo. Sus detalles describen el alcance, no tickets adicionales. Marcaremos `[x]` al terminar y validar el trabajo, y registraremos avances o bloqueos aquí. Cada pantalla incluye su adaptación desktop, tablet y mobile.
+Each checkbox tracks one complete ticket. The details define the ticket's scope. Mark the ticket `[x]` after implementation and verification, and record progress or blockers here. Each screen includes desktop, tablet, and mobile layouts.
 
-Usaremos la base existente: Next.js en `apps/web`, Tailwind 4 en `packages/tailwind-config`, componentes compartidos en `packages/ui` y Storybook en `apps/docs`.
+Use the existing Next.js app in `apps/web`, Tailwind 4 in `packages/tailwind-config`, shared components in `packages/ui`, and Storybook in `apps/docs`.
 
-## 0. Referencia y decisiones de producto
+## 0. Reference design and product decisions
 
-- [x] PLAN-01 — Consolidar referencia, contenido y decisiones pendientes.
+- [x] PLAN-01 — Consolidate the reference design, content, and open decisions.
 
-Incluye reunir assets y textos, completar las cuatro preguntas que no aparecen en el diseño y definir enlaces informativos, navegación de resultados, acción de «Quiero probar esta sidequest» y conservación de respuestas. Resolver cada decisión antes de implementar la pantalla correspondiente.
+Gather the assets and copy, write the four questions missing from the design, and define the informational links, results navigation, “Quiero probar esta sidequest” action, and answer persistence. Resolve each decision before implementing the corresponding screen.
 
-## 1. Sistema de diseño en Tailwind
+## 1. Tailwind design system
 
-- [x] DS-01 — Implementar los fundamentos visuales del diseño y documentarlos en Storybook.
+- [x] DS-01 — Implement the design foundations and document them in Storybook.
 
-Incluye revisar los estilos existentes y definir paleta, tokens semánticos, tipografías, espaciados, tamaños responsive, bordes, radios, sombras y estados interactivos. Web y Storybook deben consumir la misma base, con contraste y foco accesibles.
+Review the existing styles and define the palette, semantic tokens, typography, spacing, responsive sizes, borders, corner radii, shadows, and interactive states. Use the same foundations in the web app and Storybook, with accessible contrast and focus states.
 
-## 2. Componentes UI
+## 2. UI components
 
-- [x] UI-01 — Componentes compartidos implementados: Button, Benefit, ChoiceGroup, StepProgress y ActivityFacts, documentados en Storybook. Las tarjetas se reutilizan entre resultados y catálogo; los paneles específicos viven en la plantilla de detalle.
+- [x] UI-01 — Implemented and documented Button, Benefit, ChoiceGroup, StepProgress, and ActivityFacts in Storybook. Results and the catalog share cards, and the detail template contains its own panels.
 
-Incluye adaptar Button y crear tarjetas, badges, metadatos con iconos, listas de beneficios y pasos, y paneles de notas. Documentar sus variantes en Storybook.
+Adapt Button and create cards, badges, metadata with icons, benefits and steps lists, and note panels. Document their variants in Storybook.
 
-- [x] UI-02 — Menú, diálogos, selección única y progreso implementados. Resultados muestra hasta seis recomendaciones; el explorador muestra las 16 actividades filtrables. No se necesita paginación para este catálogo.
+- [x] UI-02 — Implemented the menu, dialogs, single selection, and progress. Results show up to six recommendations, and the explorer shows all 16 filterable activities on one page.
 
-Incluye opciones de selección única, indicador de progreso, menú mobile y navegación de resultados según el comportamiento acordado. Validar estados, teclado y foco en Storybook.
+Implement single-choice options, a progress indicator, a mobile menu, and the agreed results navigation. Verify states, keyboard interaction, and focus in Storybook.
 
-## 3. Estructura compartida de la web
+## 3. Shared web structure
 
-- [x] WEB-01 — Preparar identidad, assets y navegación responsive.
+- [x] WEB-01 — Prepare the visual identity, assets, and responsive navigation.
 
-Incluye logo, fotografías, ilustraciones, fuentes, contenedores, header desktop, menú mobile y variantes de navegación por pantalla. Sustituir contenido y metadatos del starter, configurar español y conectar los enlaces informativos acordados.
+Include the logo, photography, illustrations, fonts, containers, desktop header, mobile menu, and screen-specific navigation. Replace the starter content and metadata, set the language to Spanish, and wire up the agreed informational links.
 
-Rutas implementadas: `/`, `/cuestionario`, `/resultados`, `/actividades` y `/sidequests/[slug]`.
+Implemented routes include `/`, `/cuestionario`, `/resultados`, `/actividades`, and `/sidequests/[slug]`.
 
-## 4. Home, sección por sección
+## 4. Home page
 
-- [x] HOME-01 — Implementar el hero.
+- [x] HOME-01 — Implement the hero.
 
-Incluye título con énfasis en cursiva, descripción, CTA, texto de ayuda, fotografía, degradado, transición curva y nota manuscrita. Adaptar la composición de imagen y texto a mobile y conectar el CTA al cuestionario.
+Include the heading with italic emphasis, description, call to action, helper text, photo, gradient, curved transition, and handwritten note. Adapt the image and text composition for mobile and link the call to action to the questionnaire.
 
-- [x] HOME-02 — Implementar la sección de beneficios.
+- [x] HOME-02 — Implement the benefits section.
 
-Incluye los cuatro beneficios del diseño con iconos, títulos y descripciones; distribuir en columnas desktop y adaptar al scroll mobile.
+Include the four benefits from the design with their icons, headings, and descriptions. Arrange them in columns on desktop and adapt the layout for scrolling on mobile.
 
-- [x] HOME-03 — Implementar el cierre ilustrado y revisar la home completa.
+- [x] HOME-03 — Implement the illustrated closing section and review the full home page.
 
-Incluye «Hoy también cuenta», «Más vida. Menos sobrepensar.» y sus ilustraciones. Revisar composición, recortes, espaciados y navegación en desktop y mobile.
+Include “Hoy también cuenta” and “Más vida. Menos sobrepensar.” with their illustrations. Review composition, cropping, spacing, and navigation on desktop and mobile.
 
-## 5. Cuestionario
+## 5. Questionnaire
 
-- [x] QUEST-01 — Implementar la pantalla y el contenido de los cinco pasos.
+- [x] QUEST-01 — Implement the screen and content for all five steps.
 
-Incluye pregunta, ayuda, opciones con caritas, progreso, volver, siguiente y decoración. Pasos implementados: ánimo, tipo de actividad, tiempo, presupuesto y lugar. Adaptado a desktop y mobile, con selección por teclado.
+Include the question, helper text, options with face icons, progress, back and next controls, and decorative elements. The five implemented steps cover mood, activity type, time, budget, and location. The layout adapts to desktop and mobile, and users can select answers with the keyboard.
 
-- [x] QUEST-02 — Implementar el recorrido y la conservación de respuestas.
+- [x] QUEST-02 — Implement questionnaire navigation and answer persistence.
 
-Incluye selección y validación, avanzar y retroceder conservando elecciones, actualización de progreso y foco, persistencia acordada y navegación a resultados. Verificar edición de respuestas, recarga y recorrido por teclado.
+Support selection and validation, preserve answers when moving forward or backward, update progress and focus, apply the agreed persistence behavior, and navigate to results. Verify editing answers, reloading, and completing the flow with a keyboard.
 
-## 6. Catálogo y resultados
+## 6. Catalog and results
 
-- [x] RESULTS-01 — Crear el catálogo y la lógica de recomendaciones.
+- [x] RESULTS-01 — Create the catalog and recommendation logic.
 
-Catálogo local de 16 actividades, incluyendo las cinco de referencia. El tipo de actividad filtra la categoría; tiempo, presupuesto y lugar son límites, y el ánimo ordena las coincidencias. Cada actividad incluye resumen y primer paso. Los detalles completos ampliarán este modelo en sus tickets. Reglas deterministas y recuperación de sesión cubiertas por pruebas.
+The local catalog contains 16 activities, including the five from the reference design. Activity type filters by category. Time, budget, and location set limits, and mood ranks the matches. Each activity has a summary and first step. Later tickets extend this model with full details. Tests cover deterministic rules and session recovery.
 
-- [x] RESULTS-02 — Tarjetas con fotografías y enlaces a detalles completos, preferencias editables, reinicio y acceso al catálogo.
+- [x] RESULTS-02 — Added cards with photos and links to full details, editable preferences, a reset action, and access to the catalog.
 
-Incluye encabezado, tarjetas, grilla desktop, composición mobile, tarjeta editorial y navegación acordada. Conectar recomendaciones, detalles y «Volver a empezar»; resolver entrada sin respuestas y conservar resultados al regresar de una ficha.
+Include a header, cards, a desktop grid, a mobile layout, an editorial card, and the agreed navigation. Connect recommendations, details, and “Volver a empezar.” Handle visits without answers and preserve results when users return from an activity detail page.
 
-## 7. Detalles de actividad
+## 7. Activity details
 
-- [x] DETAIL-01 — Crear la plantilla de detalle e implementar «Cuida una planta».
+- [x] DETAIL-01 — Create the detail template and implement “Cuida una planta.”
 
-Incluye fotografía, badge, título, descripción, cita, beneficios, tiempo, costo, lugar, nivel, pasos, panel «Tu primer paso» y CTA funcional. Respetar el orden específico de mobile. Implementar ruta por slug, regreso a resultados y estado para actividad inexistente.
+Include a photo, badge, title, description, quote, benefits, time, cost, location, difficulty level, steps, the “Tu primer paso” panel, and a working call to action. Follow the mobile content order. Implement the slug route, navigation back to results, and the state for an unknown activity.
 
-- [x] DETAIL-02 — Implementar el detalle de ukelele sobre la plantilla compartida.
+- [x] DETAIL-02 — Implement the ukulele activity using the shared template.
+- [x] DETAIL-03 — Implement the art fair activity using the shared template.
+- [x] DETAIL-04 — Implement the pottery activity using the shared template.
+- [x] DETAIL-05 — Implement the walking activity using the shared template.
 
-- [x] DETAIL-03 — Implementar el detalle de feria de arte sobre la plantilla compartida.
+Give each activity its own photo, facts, benefits, and steps. Review each page on desktop and mobile. Use verified information for any availability, dates, or businesses mentioned for local activities.
 
-- [x] DETAIL-04 — Implementar el detalle de cerámica sobre la plantilla compartida.
+## 8. Final verification
 
-- [x] DETAIL-05 — Implementar el detalle de caminata sobre la plantilla compartida.
+- [ ] QA-01 — Verify the entire flow and its fidelity to the design.
 
-Cada ficha debe tener fotografía, datos, beneficios y pasos propios, y revisarse en desktop y mobile. No inventar disponibilidad, fechas ni comercios para actividades locales.
+Go through the home page, questionnaire, results, every detail page, and reset. Check reloads, browser navigation, direct URLs, and invalid states. Compare the app with the design on desktop, tablet, and mobile. Check accessibility, long text, image loading, and overflow.
 
-## 8. Validación final
+- [x] QA-02 — Complete technical checks and documentation.
 
-- [ ] QA-01 — Validar el flujo completo y la fidelidad visual.
+Run lint, type checks, and builds for affected packages. Verify that type checking covers UI, whose script is called `typecheck`. Add tests for the questionnaire, recommendations, and the main flow where useful. Update the README and record limitations and environments still to verify.
 
-Recorrer home, cuestionario, resultados, cada detalle y reinicio. Revisar recarga, navegación del navegador, rutas directas y estados inválidos; comparar con el diseño en desktop, tablet y mobile. Comprobar accesibilidad, textos largos, carga de imágenes y ausencia de desbordamientos.
+## Ticket completion criteria
 
-- [x] QA-02 — Completar comprobaciones técnicas y documentación.
+Implement the agreed scope, review the relevant sizes and states, and run the applicable checks. Review component tickets in Storybook and compare screen tickets against the design in the web app.
 
-Ejecutar lint, tipos y build de los paquetes afectados; verificar que el chequeo incluya UI, cuyo script actual se llama `typecheck`. Añadir pruebas útiles del cuestionario, recomendador y recorrido principal. Actualizar README y registrar limitaciones o entornos no verificados.
+## Out of scope
 
-## Criterio de cierre de cada ticket
+Accounts, backend services, payments, bookings, favorites, habit tracking, a user dashboard, AI recommendations, and dark mode. The phone frames and presentation labels in the reference image are also outside the scope of the web app.
 
-El alcance está implementado, se ha revisado en los tamaños y estados relevantes y se han ejecutado las comprobaciones apropiadas. Los tickets de UI se pueden revisar en Storybook; los de pantalla, en la web contra la referencia.
+## Delivery status
 
-## Fuera de alcance
+Functional implementation is complete, including `/actividades` and individual detail pages for all 16 activities. QA-01 still includes a final comparison against the original reference design and verification in Safari and on physical devices. Chrome was used to verify functional flows and responsive layouts.
 
-Cuentas, backend, pagos, reservas, favoritos, seguimiento de hábitos, panel de usuario, recomendaciones con IA y modo oscuro. Los marcos de teléfono y rótulos de presentación de la imagen tampoco forman parte de la web.
+## Activity explorer
 
-## Estado de entrega
+- [x] EXPLORE-01 — The full catalog supports accent- and case-insensitive search, combinable filters stored in the URL, a result count, an empty state, and a control to clear filters. Users can open it from the desktop or mobile header or the results page. Returning from an activity detail page restores the catalog filters.
 
-Implementación funcional completada, incluyendo `/actividades` y fichas propias para las 16 actividades. QA-01 mantiene pendiente la comparación final con la referencia original, Safari y dispositivos físicos; los recorridos funcionales y tamaños responsive se verificaron en Chrome.
+## Changelog
 
-## Explorador
+| Date | Change | Status |
+| --- | --- | --- |
+| 2026-09-13 | Adapted the plan to the existing monorepo. | Implementation pending. |
+| 2026-09-13 | Consolidated the plan into one ticket per deliverable. | Plan updated. |
 
-- [x] EXPLORE-01 — Catálogo completo con búsqueda sin distinción de acentos/mayúsculas, filtros combinables, URL persistente, contador, estado vacío y limpieza. Acceso desde header desktop/mobile y resultados; las fichas regresan al catálogo con los filtros conservados.
+### Home page delivery
 
-## Bitácora
+The home page shipped on desktop and mobile with local fonts, a generated photo, decorative SVGs, benefits, and an illustrated closing section. Informational links opened dialogs with initial content. At that stage, the call to action displayed a temporary notice. The questionnaire delivery replaced it with the questionnaire flow.
 
-| Fecha      | Cambio                                                                     | Estado                    |
-| ---------- | -------------------------------------------------------------------------- | ------------------------- |
-| 2026-09-13 | Plan adaptado al monorepo existente.                                       | Implementación pendiente. |
-| 2026-09-13 | Simplificación de todo el plan en tickets por entregable, sin microtareas. | Plan actualizado.         |
+Verification covered lint and type checks for web and UI, the Webpack build for web, and the Storybook build. Chrome checks at 390, 768, and 1440 px covered horizontal overflow, JavaScript errors, menus, and dialogs. Turbopack could not open a CSS processing port in that environment. Verification in Safari and on a physical device was pending.
 
-### Entrega de home
+### Questionnaire and recommendations delivery
 
-Home implementada en desktop y mobile, con fuentes locales, fotografía generada, SVG decorativos, beneficios y cierre. Los enlaces informativos abren diálogos con contenido inicial. En esa entrega, el CTA mostraba un aviso temporal. La entrega de cuestionario descrita abajo lo sustituye por el flujo real.
+The “¿Qué te gustaría hacer?” step added five choices: “Calma,” “Creatividad,” “Movimiento,” “Explorar,” and “Sorpréndeme.” The questionnaire still has five steps. This choice changes which activities qualify for recommendations.
 
-Validación: lint de web y UI, tipos de web y UI, build web con Webpack y build de Storybook. Chrome: 390, 768 y 1440 px sin desbordamiento horizontal ni errores JavaScript; menú y diálogos comprobados. El build con Turbopack falla al intentar abrir un puerto de procesamiento CSS en este entorno. Safari y dispositivo físico pendientes.
+Answers stay in `sessionStorage` for the browser session. The flow requires neither an account nor a backend. If storage is blocked, answers stay in memory until reload. Users can go back, reload, edit preferences, and start over. Incomplete or invalid input requires an answer before the user can advance. When there are no matches, users can adjust their preferences and the constraints stay in effect.
 
-Capturas de revisión: [desktop](docs/design/home-desktop.png) y [mobile](docs/design/home-mobile.png). Assets y prompt: [documentación](docs/design/ASSETS.md).
+Verification included six automated tests covering 240 combinations of activity type, time, budget, and location, plus lint and type checks for web and UI, the Webpack build for web, and the Storybook build. Chrome checks covered the full flow, keyboard navigation, reload, the browser back button, category changes, reset, corrupt session data, and blocked storage. The checks found no overflow or JavaScript errors at 360, 390, 768, and 1440 px. Verification in Safari and on physical devices was pending.
 
-### Entrega de cuestionario y recomendaciones
+### Activity details and explorer delivery
 
-Se añadió el paso explícito «¿Qué te gustaría hacer?» con Calma, Creatividad, Movimiento, Explorar y Sorpréndeme. Se conserva el total de cinco pasos. La selección cambia el conjunto de actividades recomendado, no solo el texto del resultado.
+All 16 activities have a local photo and individual descriptions, quotes, benefits, materials, and steps. “Quiero probar esta sidequest” reveals and focuses the first step. Detail pages link back to results or to the explorer based on where the user came from. Direct visits offer a link to explore activities. Informational links still open dialogs without an account or backend. Answers stay in `sessionStorage`, and catalog filters stay in the URL. Costs are estimates. The catalog provides no live availability or booking information.
 
-Las respuestas se conservan en `sessionStorage` durante la sesión del navegador, sin cuenta ni backend. Si el almacenamiento está bloqueado, el recorrido sigue funcionando en memoria hasta recargar. Se puede retroceder, recargar, editar preferencias y reiniciar. Las entradas incompletas o inválidas no permiten saltarse preguntas. Si no hubiera coincidencias, se ofrece ajustar preferencias sin ignorar silenciosamente los límites.
-
-Validación: seis pruebas automatizadas, incluyendo 240 combinaciones de tipo/tiempo/presupuesto/lugar; lint y tipos de web/UI; builds de web con Webpack y Storybook. Chrome comprobó el recorrido completo, teclado, recarga, atrás del navegador, cambio de categoría, reinicio, sesión corrupta y almacenamiento bloqueado. Sin desbordamiento en 360, 390, 768 y 1440 px ni errores JavaScript. Safari y dispositivos físicos siguen pendientes.
-
-Capturas: [tipo de actividad desktop](docs/design/quest-type-desktop.png), [mobile](docs/design/quest-type-mobile.png) y [resultados](docs/design/quest-results-desktop.png).
-
-### Entrega de detalles y explorador
-
-Las 16 actividades tienen fotografía local y contenido propio: descripción, cita, beneficios, materiales y pasos. «Quiero probar esta sidequest» enfoca y muestra el primer paso. Las fichas regresan a resultados o al explorador según el origen; una entrada directa ofrece explorar actividades. Los enlaces informativos conservan los diálogos sin cuenta ni backend. Respuestas en sessionStorage; filtros del catálogo en la URL. Costos orientativos, sin disponibilidad ni reservas inventadas.
-
-Validación: 12 pruebas de datos, recomendaciones y filtros; tipos de web/UI incluidos en el comando raíz; build web con Webpack y Storybook. Se actualizó ESLint de docs y su configuración para que use la base compartida actual. Chrome verificó las 16 fichas, fotografías, metadatos, CTA por teclado, ausencia de desbordamiento desktop/mobile, tablet, menú, slug inválido y regreso a los mismos resultados. El explorador se revisó en 360, 390, 768 y 1440 px, incluyendo filtros, búsqueda, retorno desde detalle y estado vacío. Capturas: `docs/design/explore-390.png` y `docs/design/explore-1440.png`. La comparación exacta contra la referencia original, Safari y dispositivo físico siguen pendientes.
+Verification included 12 tests for data, recommendations, and filters, the root type check for web and UI, the Webpack build for web, and the Storybook build. The Storybook package's ESLint dependency and configuration were updated to use the current shared base. Chrome checks covered all 16 detail pages, photos, metadata, keyboard activation of the call to action, overflow on desktop and mobile, tablet layouts, the menu, invalid slugs, and returning to the same results. The explorer was checked at 360, 390, 768, and 1440 px, including filtering, search, returning from details, and the empty state. Exact comparison with the original reference design and verification in Safari and on a physical device remain pending.
