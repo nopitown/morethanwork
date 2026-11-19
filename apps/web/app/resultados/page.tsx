@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 export default function ResultsPage() {
   return (
-    <InternalPage action="none">
+    <InternalPage>
       <Results />
     </InternalPage>
   );

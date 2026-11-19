@@ -41,7 +41,7 @@ export default async function ActivityPage({ params, searchParams }: Props) {
       ? from
       : undefined;
   return (
-    <InternalPage action="none">
+    <InternalPage>
       <ActivityDetail activity={activity} detail={detail} backTo={backTo} />
     </InternalPage>
   );

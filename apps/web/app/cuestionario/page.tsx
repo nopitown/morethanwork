@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 export default function QuestPage() {
   return (
-    <InternalPage action="none">
+    <InternalPage>
       <Suspense fallback={<QuestLoading>Preparando tu espacio…</QuestLoading>}>
         <Questionnaire />
       </Suspense>

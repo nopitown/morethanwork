@@ -2,6 +2,7 @@
 
 import { useRef, useState, type RefObject } from "react";
 import Link from "next/link";
+import { useSelectedLayoutSegments } from "next/navigation";
 import { cn } from "@repo/ui/lib/utils";
 import { QuestCta } from "./quest-cta";
 
@@ -68,11 +69,20 @@ function NavigationLinks({
   );
 }
 
-export function SiteHeader({
-  action = "start",
-}: {
-  action?: "start" | "none";
-}) {
+export function SiteHeader() {
+  const segments = useSelectedLayoutSegments();
+  const [section, activity] = segments;
+  const showQuestCta =
+    section !== "cuestionario" &&
+    section !== "resultados" &&
+    !(section === "actividades" && activity);
+
+  return (
+    <SiteHeaderContent key={segments.join("/")} showQuestCta={showQuestCta} />
+  );
+}
+
+function SiteHeaderContent({ showQuestCta }: { showQuestCta: boolean }) {
   const [open, setOpen] = useState(false);
   const [topic, setTopic] = useState<SiteInfoTopic>("Sobre");
   const dialog = useRef<HTMLDialogElement>(null);
@@ -122,7 +132,7 @@ export function SiteHeader({
           className="flex items-center gap-[34px] compact:gap-[18px] menu:hidden"
         >
           <NavigationLinks showInfo={showInfo} />
-          {action === "start" && (
+          {showQuestCta && (
             <QuestCta className="ml-[15px] min-h-11 px-[21px] py-3 text-[12px] compact:ml-0" />
           )}
         </nav>
@@ -154,7 +164,7 @@ export function SiteHeader({
               showInfo={showInfo}
               onNavigate={() => setOpen(false)}
             />
-            {action === "start" && (
+            {showQuestCta && (
               <QuestCta
                 className="phone:mt-1.5"
                 onOpen={() => setOpen(false)}

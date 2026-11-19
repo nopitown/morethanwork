@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import { SiteFooter } from "@components/site-footer";
+import { SiteHeader } from "@components/site-header";
+import "../styles/globals.css";
 
 export const metadata: Metadata = {
   title: "more than work. — Tu vida es mucho más",
@@ -12,8 +14,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
-      <body className="[--page-gutter:min(4.45vw,53.4px)] stacked:[--page-gutter:24px]">
+      <body className="flex min-h-svh flex-col bg-background text-ink [--page-gutter:min(4.45vw,53.4px)] stacked:[--page-gutter:24px]">
+        <SiteHeader />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );
