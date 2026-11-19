@@ -35,7 +35,6 @@ is a Turborepo workspace, and the Next.js app lives in `apps/web`.
 - `packages/tailwind-config` contains design tokens and local fonts.
 - `packages/ui` contains shared components.
 - `apps/docs` contains the Storybook component catalog.
-- [PLAN.md](PLAN.md) tracks tickets, progress, and verification.
 
 ## Questionnaire and recommendations
 
