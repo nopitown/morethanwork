@@ -13,7 +13,6 @@ export function DetailBack({ slug, from }: { slug: string; from?: string }) {
       className="detail-back"
       href={from ?? (hasResults ? `/resultados#${slug}` : "/actividades")}
     >
-      <span aria-hidden="true">←</span>
       {from || !hasResults ? "Volver a actividades" : "Volver a resultados"}
     </Link>
   );
@@ -34,8 +33,7 @@ export function StartActivity() {
   return (
     <div className="detail-action">
       <Button className="home-cta" onClick={start}>
-        {started ? "Ver mi primer paso" : "Quiero probar esta sidequest"}
-        <span aria-hidden="true">→</span>
+        {started ? "Ver mi primer paso" : "Quiero probar esta actividad"}
       </Button>
       <p role="status" className="detail-action-status">
         {started

@@ -37,7 +37,6 @@ export function Results() {
           {Object.keys(session.answers).length
             ? "Continuar cuestionario"
             : "Empezar cuestionario"}
-          <span aria-hidden="true">→</span>
         </Link>
       </section>
     );
@@ -47,7 +46,7 @@ export function Results() {
     <section className="results-container">
       <div className="results-toolbar">
         <Link href="/cuestionario?paso=2" className="text-action">
-          ← Ajustar mis respuestas
+          Ajustar mis respuestas
         </Link>
         <button
           className="restart-button"
@@ -65,7 +64,7 @@ export function Results() {
           <span aria-hidden="true">· · ·</span>
         </p>
         <h1>
-          Estas sidequests
+          Estas actividades
           <br />
           podrían ser para ti
         </h1>
@@ -81,7 +80,6 @@ export function Results() {
               aria-label={`Cambiar preferencia: ${optionLabel(question.id, answers[question.id])}`}
             >
               {optionLabel(question.id, answers[question.id])}
-              <span aria-hidden="true"> ↗</span>
             </Link>
           ))}
       </div>
@@ -120,13 +118,13 @@ export function Results() {
             actividad que te gusta.
           </p>
           <Link href="/cuestionario?paso=3" className="home-cta">
-            Ajustar mis preferencias <span aria-hidden="true">→</span>
+            Ajustar mis preferencias
           </Link>
         </div>
       )}
       <p className="results-footer">
         <Link href="/actividades" className="text-action">
-          Explorar todas las actividades →
+          Explorar todas las actividades
         </Link>
         <br />
         No es otra lista de pendientes. Es un espacio para ti.

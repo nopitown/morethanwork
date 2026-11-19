@@ -3,7 +3,6 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { QuestCta } from "./quest-cta";
-import { BrandLeaf } from "./illustrations";
 
 const content = {
   "Cómo funciona": {
@@ -16,7 +15,7 @@ const content = {
   },
   Sobre: {
     title: "Tu vida es mucho más que tu trabajo.",
-    body: "Sidequests nace de una idea sencilla: también mereces tiempo para lo que te hace bien. Queremos acompañarte a explorar intereses, disfrutar lo cotidiano y encontrar pequeños momentos que sean solo tuyos.",
+    body: "more than work. nace de una idea sencilla: también mereces tiempo para lo que te hace bien. Queremos acompañarte a explorar intereses, disfrutar lo cotidiano y encontrar pequeños momentos que sean solo tuyos.",
   },
 };
 type Info = keyof typeof content;
@@ -26,6 +25,8 @@ export function SiteHeader({
 }: {
   action?: "start" | "none";
 }) {
+  const brand = "more than work.";
+  let logoLetterIndex = 0;
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState<Info>("Sobre");
   const dialog = useRef<HTMLDialogElement>(null);
@@ -40,10 +41,23 @@ export function SiteHeader({
       <a href="#contenido" className="skip-link">
         Saltar al contenido
       </a>
-      <header className="site-header">
-        <Link href="/" aria-label="Sidequests, inicio" className="brand">
-          <BrandLeaf />
-          <span>Sidequests</span>
+      <header className="site-header site-header--morethanwork">
+        <Link href="/" aria-label={`${brand}, inicio`} className="brand">
+          <span>
+            {Array.from(brand).map((letter, index) =>
+              letter === " " ? (
+                " "
+              ) : (
+                <span
+                  key={index}
+                  className="brand-letter"
+                  style={{ animationDelay: `${logoLetterIndex++ * 63.28125}ms` }}
+                >
+                  {letter}
+                </span>
+              ),
+            )}
+          </span>
         </Link>
         <nav aria-label="Navegación principal" className="desktop-nav">
           <Link href="/actividades" className="explore-nav">
@@ -54,9 +68,7 @@ export function SiteHeader({
               {key}
             </button>
           ))}
-          {action === "start" && (
-            <QuestCta className="header-cta" arrow={false} />
-          )}
+          {action === "start" && <QuestCta className="header-cta" />}
         </nav>
         <button
           ref={menuButton}
@@ -92,7 +104,9 @@ export function SiteHeader({
                 {key}
               </button>
             ))}
-            {action === "start" && <QuestCta onOpen={() => setOpen(false)} />}
+            {action === "start" && (
+              <QuestCta onOpen={() => setOpen(false)} />
+            )}
           </nav>
         )}
       </header>
@@ -115,7 +129,7 @@ export function SiteHeader({
         <h2 id="info-title">{content[info].title}</h2>
         <p>{content[info].body}</p>
         <button className="home-cta" onClick={() => dialog.current?.close()}>
-          Entendido <span aria-hidden="true">→</span>
+          Entendido
         </button>
       </dialog>
     </>

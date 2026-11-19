@@ -6,17 +6,16 @@ import { activityImage } from "../lib/activity-details";
 export function ActivityCard({
   activity,
   from,
+  featured = false,
 }: {
   activity: Activity;
   from?: string;
+  featured?: boolean;
 }) {
-  const href = `/sidequests/${activity.slug}${from ? `?from=${encodeURIComponent(from)}` : ""}`;
+  const href = `/actividades/${activity.slug}${from ? `?from=${encodeURIComponent(from)}` : ""}`;
+  const Heading = featured ? "h3" : "h2";
   return (
-    <article
-      className="activity-card"
-
-      id={activity.slug}
-    >
+    <article className="activity-card" id={activity.slug}>
       <Link
         href={href}
         className="activity-card-image"
@@ -38,9 +37,9 @@ export function ActivityCard({
           {categories[activity.type].label} ·{" "}
           {activity.place === "home" ? "En casa" : "Afuera"}
         </span>
-        <h2>
+        <Heading className="activity-card-title">
           <Link href={href}>{activity.title}</Link>
-        </h2>
+        </Heading>
         <p>{activity.description}</p>
         <div className="activity-meta">
           <span>
@@ -57,7 +56,7 @@ export function ActivityCard({
           href={href}
           aria-label={`Descubrir: ${activity.title}`}
         >
-          Descubrir esta sidequest <span aria-hidden="true">→</span>
+          {featured ? "Descubrir actividad" : "Descubrir esta actividad"}
         </Link>
       </div>
     </article>

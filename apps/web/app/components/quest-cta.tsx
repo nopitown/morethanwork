@@ -2,12 +2,12 @@
 import Link from "next/link";
 export function QuestCta({
   className = "",
-  arrow = true,
   onOpen,
+  label = "Encuentra algo para ti",
 }: {
   className?: string;
-  arrow?: boolean;
   onOpen?: () => void;
+  label?: string;
 }) {
   return (
     <Link
@@ -15,7 +15,7 @@ export function QuestCta({
       className={`home-cta ${className}`}
       onClick={onOpen}
     >
-      Encuentra tu sidequest{arrow && <span aria-hidden="true">→</span>}
+      {label}
     </Link>
   );
 }

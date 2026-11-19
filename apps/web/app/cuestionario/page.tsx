@@ -1,14 +1,13 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { SiteHeader } from "../components/site-header";
+import { InternalPage } from "../components/internal-page";
 import { Questionnaire } from "./questionnaire";
 export const metadata: Metadata = {
-  title: "Encuentra tu sidequest — Sidequests",
+  title: "Encuentra una actividad — more than work.",
 };
 export default function QuestPage() {
   return (
-    <div className="quest-page">
-      <SiteHeader action="none" />
+    <InternalPage className="quest-page" action="none">
       <main id="contenido">
         <Suspense
           fallback={
@@ -20,6 +19,6 @@ export default function QuestPage() {
           <Questionnaire />
         </Suspense>
       </main>
-    </div>
+    </InternalPage>
   );
 }

@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "../components/site-header";
+import { InternalPage } from "../components/internal-page";
 import { Results } from "./results";
 export const metadata: Metadata = {
-  title: "Tus sidequests — Sidequests",
+  title: "Tus actividades — more than work.",
   robots: { index: false },
 };
 export default function ResultsPage() {
   return (
-    <div className="results-page">
-      <SiteHeader action="none" />
+    <InternalPage className="results-page" action="none">
       <main id="contenido">
         <Results />
       </main>
-    </div>
+    </InternalPage>
   );
 }

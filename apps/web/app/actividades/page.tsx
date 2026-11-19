@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "../components/site-header";
+import { InternalPage } from "../components/internal-page";
 import { ActivityCard } from "../components/activity-card";
 import { activities, categories } from "../lib/activities";
 import { filterActivities } from "../lib/explore";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Explorar actividades — Sidequests",
+  title: "Explorar actividades — more than work.",
   description:
     "Descubre pequeñas actividades para disfrutar a tu ritmo. Encuentra ideas por categoría, tiempo, presupuesto y lugar.",
 };
@@ -31,8 +31,7 @@ export default async function ActivitiesPage({
   ).toString();
   const from = `/actividades${query ? `?${query}` : ""}`;
   return (
-    <div className="results-page">
-      <SiteHeader />
+    <InternalPage className="results-page">
       <main id="contenido" className="results-container explore-container">
         <header className="results-heading">
           <p className="eyebrow">Un espacio para tu curiosidad</p>
@@ -95,7 +94,7 @@ export default async function ActivitiesPage({
           </label>
           <div className="explore-filter-actions">
             <button type="submit" className="home-cta">
-              Buscar actividades <span aria-hidden="true">→</span>
+              Buscar actividades
             </button>
             <Link href="/actividades" className="text-action">
               Limpiar filtros
@@ -124,7 +123,7 @@ export default async function ActivitiesPage({
               o amplía tus preferencias.
             </p>
             <Link href="/actividades" className="home-cta">
-              Ver todas las actividades →
+              Ver todas las actividades
             </Link>
           </section>
         )}
@@ -132,10 +131,10 @@ export default async function ActivitiesPage({
           <h2>¿No sabes por dónde empezar?</h2>
           <p>Cuéntanos cómo estás y encuentra ideas que encajen contigo.</p>
           <Link href="/cuestionario" className="text-action">
-            Encontrar mi sidequest →
+            Encontrar una actividad
           </Link>
         </aside>
       </main>
-    </div>
+    </InternalPage>
   );
 }

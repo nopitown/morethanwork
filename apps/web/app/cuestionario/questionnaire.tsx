@@ -4,7 +4,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@repo/ui/components/button";
 import { ChoiceGroup } from "@repo/ui/components/choice-group";
 import { StepProgress } from "@repo/ui/components/step-progress";
-import { Sprout } from "../components/illustrations";
 import { availableStep, questions, type Answers } from "../lib/quest";
 import { saveSession, useQuestSession } from "../lib/quest-session";
 
@@ -40,8 +39,7 @@ export function Questionnaire() {
           className="quest-back"
           onClick={() => (step ? go(step - 1) : router.push("/"))}
         >
-          <span aria-hidden="true">←</span>
-          <span>Volver</span>
+          Volver
         </button>
         <StepProgress current={step + 1} total={questions.length} />
       </div>
@@ -78,17 +76,11 @@ export function Questionnaire() {
           }
         />
         <div className="quest-bottom">
-          <p className="quest-note">{question.note}</p>
           <Button type="submit" className="home-cta" disabled={!selected}>
-            {step === questions.length - 1 ? "Ver mis sidequests" : "Siguiente"}
-            <span aria-hidden="true">→</span>
+            {step === questions.length - 1 ? "Ver mis actividades" : "Siguiente"}
           </Button>
         </div>
-        {!selected && (
-          <p className="selection-hint">Elige una opción para continuar.</p>
-        )}
       </form>
-      <Sprout className="quest-plant" />
     </div>
   );
 }

@@ -4,26 +4,28 @@ import { notFound } from "next/navigation";
 import { ActivityFacts } from "@repo/ui/components/activity-facts";
 import { activities, categories } from "../../lib/activities";
 import { activityDetails, activityImage } from "../../lib/activity-details";
-import { SiteHeader } from "../../components/site-header";
+import { InternalPage } from "../../components/internal-page";
 import { Sprout } from "../../components/illustrations";
 import { DetailBack, StartActivity } from "./detail-actions";
 
 type Props = {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ from?: string }>;
+  searchParams: Promise<{ from?: string | string[] }>;
 };
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return activities.map((activity) => ({ slug: activity.slug }));
 }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const activity = activities.find((item) => item.slug === slug);
-  if (!activity) return { title: "Actividad no encontrada — Sidequests" };
+  if (!activity) return { title: "Actividad no encontrada — more than work." };
   return {
-    title: `${activity.title} — Sidequests`,
+    title: `${activity.title} — more than work.`,
     description: activity.description,
     openGraph: {
-      title: `${activity.title} — Sidequests`,
+      title: `${activity.title} — more than work.`,
       description: activity.description,
     },
   };
@@ -35,13 +37,15 @@ export default async function ActivityPage({ params, searchParams }: Props) {
   if (!activity || !detail) notFound();
   const { from } = await searchParams;
   const backTo =
-    from === "/actividades" || from?.startsWith("/actividades?")
+    typeof from === "string" &&
+    (from === "/#actividades-destacadas" ||
+      from === "/actividades" ||
+      from.startsWith("/actividades?"))
       ? from
       : undefined;
   const category = categories[activity.type];
   return (
-    <div className="detail-page">
-      <SiteHeader action="none" />
+    <InternalPage className="detail-page" action="none">
       <main id="contenido">
         <nav className="detail-navigation" aria-label="Volver">
           <DetailBack slug={slug} from={backTo} />
@@ -52,7 +56,7 @@ export default async function ActivityPage({ params, searchParams }: Props) {
             alt={detail.imageAlt}
             fill
             priority
-            sizes="(max-width: 1280px) 100vw, 1280px"
+            sizes="(max-width: 1200px) 100vw, 1200px"
           />
           <p aria-hidden="true">{detail.heroNote}</p>
         </div>
@@ -116,17 +120,15 @@ export default async function ActivityPage({ params, searchParams }: Props) {
             </span>
             <p>{activity.firstStep}</p>
             <span className="first-step-note">
-              Un pequeño comienzo
-              <br />
-              también cuenta.
+              Un pequeño comienzo también cuenta.
             </span>
           </aside>
         </article>
-        <footer className="detail-footer">
+        <div className="detail-footer">
           <Sprout />
           <p>Más vida. Menos sobrepensar.</p>
-        </footer>
+        </div>
       </main>
-    </div>
+    </InternalPage>
   );
 }
