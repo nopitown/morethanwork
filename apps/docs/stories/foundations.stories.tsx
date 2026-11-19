@@ -7,7 +7,7 @@ function Foundations() {
     <div className="mx-auto max-w-4xl space-y-10 p-8">
       <div>
         <p className="mb-3 text-xs uppercase tracking-widest">
-          Sidequests · Fundamentos
+          more than work · Fundamentos
         </p>
         <h1 className="font-heading text-6xl">
           Tu vida es <em className="text-primary">mucho más.</em>
@@ -36,7 +36,7 @@ function Foundations() {
         ))}
       </div>
       <div className="flex flex-wrap gap-4">
-        <Button size="lg">Encuentra tu sidequest →</Button>
+        <Button size="lg">Encuentra una actividad →</Button>
         <Button variant="outline" size="lg">
           Volver a empezar
         </Button>
@@ -57,7 +57,7 @@ function Foundations() {
   );
 }
 const meta = {
-  title: "Sidequests/Fundamentos",
+  title: "more than work/Fundamentos",
   component: Foundations,
   parameters: { layout: "fullscreen" },
 } satisfies Meta<typeof Foundations>;

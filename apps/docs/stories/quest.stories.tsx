@@ -54,7 +54,7 @@ function QuestControls({ initialValue = "" }) {
   );
 }
 const meta = {
-  title: "Sidequests/Cuestionario",
+  title: "more than work/Cuestionario",
   component: QuestControls,
   parameters: { layout: "fullscreen" },
 } satisfies Meta<typeof QuestControls>;

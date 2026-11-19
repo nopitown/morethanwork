@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ActivityFacts } from "@repo/ui/components/activity-facts";
 const meta = {
-  title: "Sidequests/Datos de actividad",
+  title: "more than work/Datos de actividad",
   component: ActivityFacts,
   parameters: { layout: "padded" },
   args: { minutes: 15, cost: 50, place: "home" },

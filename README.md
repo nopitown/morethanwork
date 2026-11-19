@@ -1,4 +1,4 @@
-# Sidequests
+# more than work
 
 A Spanish-language website for discovering activities and interests beyond work on desktop and mobile.
 
